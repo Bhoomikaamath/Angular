@@ -1,0 +1,19 @@
+header {
+    background-color: #343a40; /* Dark background color for a sleek look */
+    padding: 20px; /* Add padding inside the header */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center-align the heading horizontally */
+    align-items: center; /* Center-align items vertically */
+    border-bottom: 3px solid #495057; /* Slightly darker border for contrast */
+  }
+  
+  header h5 {
+    margin: 0; /* Remove default margin */
+    font-size: 1.25rem; /* Adjust font size */
+    color: #ffffff; /* White color for the text */
+    font-weight: 600; /* Semi-bold font weight */
+    letter-spacing: 1px; /* Space out letters slightly */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Add subtle shadow for a slight 3D effect */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif font */
+  }
+  

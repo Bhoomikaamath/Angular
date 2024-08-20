@@ -1,0 +1,31 @@
+<h2>Edit Item</h2>
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" formControlName="name" type="text">
+  </div>
+
+  <div class="form-group">
+    <label for="dob">Date of Birth</label>
+    <input id="dob" formControlName="dob" type="date">
+  </div>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <div>
+      <label>
+        <input type="radio" formControlName="gender" value="Male">
+        Male
+      </label>
+      <label>
+        <input type="radio" formControlName="gender" value="Female">
+        Female
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit">Save</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>
