@@ -1,38 +1,91 @@
 <form (ngSubmit)="onSubmit()" #addItemForm="ngForm" class="form-container">
-    <div class="form-group mb-4">
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" name="fullname" [(ngModel)]="model.fullname" class="form-control" placeholder="Full Name" required>
-      <div *ngIf="addItemForm.submitted && !model.fullname" class="invalid-feedback">
+  <div class="form-group mb-4">
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" [(ngModel)]="model.fullName" class="form-control" placeholder="Full Name" required>
+    <div *ngIf="addItemForm.submitted && !model.fullName" class="invalid-feedback">
         Full Name is required.
-      </div>
     </div>
-  
-    <div class="form-group mb-4">
-      <label for="dob">Date of Birth</label>
-      <input type="date" id="dob" name="dob" [(ngModel)]="model.dob" class="form-control" required>
-      <div *ngIf="addItemForm.submitted && !model.dob" class="invalid-feedback">
-        Date of Birth is required.
-      </div>l
-    </div>
-  
-    <div class="form-group mb-4">
-        <label>Gender</label>
-        <div class="form-check form-check-inline">
-          <input type="radio" id="male" name="gender" [(ngModel)]="model.gender" value="Male" class="form-check-input" required>
-          <label for="male" class="form-check-label">Male</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input type="radio" id="female" name="gender" [(ngModel)]="model.gender" value="Female" class="form-check-input" required>
-          <label for="female" class="form-check-label">Female</label>
-        </div>
-        <div *ngIf="addItemForm.submitted && !model.gender" class="invalid-feedback">
-          Gender is required.
-        </div>
-      </div>
-      
-  
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
 
-  </form>
-  
+ 
+  <div class="form-group mb-4">
+    <label>Gender</label>
+    <div class="form-check form-check-inline">
+      <input type="radio" id="male" name="gender" [(ngModel)]="model.gender" value="Male" class="form-check-input" required>
+      <label for="male" class="form-check-label">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="radio" id="female" name="gender" [(ngModel)]="model.gender" value="Female" class="form-check-input" required>
+      <label for="female" class="form-check-label">Female</label>
+    </div>
+    <div *ngIf="addItemForm.submitted && !model.gender" class="invalid-feedback">
+        Gender is required.
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" [(ngModel)]="model.email" class="form-control" placeholder="Email" required>
+    <div *ngIf="addItemForm.submitted && !model.email" class="invalid-feedback">
+        Email is required.
+    </div>
+    <div *ngIf="addItemForm.submitted && model.email && !isEmailValid()" class="invalid-feedback">
+        Email is not valid.
+    </div>
+    <div *ngIf="addItemForm.submitted && model.email && errorMessage === 'Email is already registered.'" class="invalid-feedback">
+        Email is already registered.
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" [(ngModel)]="model.phone" class="form-control" placeholder="Phone Number" required>
+    <div *ngIf="addItemForm.submitted && !model.phone" class="invalid-feedback">
+        Phone Number is required.
+    </div>
+    <div *ngIf="addItemForm.submitted && model.phone && !isPhoneNumberValid()" class="invalid-feedback">
+        Phone Number must be exactly 10 digits.
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob" [(ngModel)]="model.dob" class="form-control" required>
+    <div *ngIf="addItemForm.submitted && !model.dob" class="invalid-feedback">
+        Date of Birth is required.
+    </div>
+    <div *ngIf="addItemForm.submitted && model.dob && !isDobValid()" class="invalid-feedback">
+        Date of Birth must be a past date.
+    </div>
+</div>
+
+
+  <!-- <div class="form-group mb-4">
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" [(ngModel)]="model.phone" class="form-control" placeholder="Phone Number" required>
+    <div *ngIf="addItemForm.submitted && !model.phone" class="invalid-feedback">
+        Phone Number is required.
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" [(ngModel)]="model.email" class="form-control" placeholder="Email" required>
+    <div *ngIf="addItemForm.submitted && !model.email" class="invalid-feedback">
+        Email is required.
+    </div>
+    <div *ngIf="addItemForm.submitted && model.email && !isEmailValid()" class="invalid-feedback">
+        Email is not valid.
+    </div>
+    <div *ngIf="errorMessage && errorMessage.includes('Email is already registered')" class="invalid-feedback">
+      {{ errorMessage }}
+    </div>
+  </div> -->
+
+  <!-- <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+    {{ errorMessage }}
+  </div> -->
+
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button class="btn-red" type="button" (click)="reset(addItemForm)">Reset</button>
+</form>

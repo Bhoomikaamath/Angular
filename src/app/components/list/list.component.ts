@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Import MatDialog
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatTableModule } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { AddComponent } from '../add/add.component'; // Import the AddComponent
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Router, RouterLink } from '@angular/router';
+import { DataService } from '../../services/data.service';
 import { EditComponent } from '../edit/edit.component';
+import { AddComponent } from '../add/add.component';
 
 @Component({
   selector: 'app-list',
@@ -20,49 +23,68 @@ import { EditComponent } from '../edit/edit.component';
     MatInputModule,
     MatRadioModule,
     MatIconModule,
-    MatDialogModule // Import MatDialogModule here
+    HttpClientModule,
+    MatDialogModule,
+    RouterLink,
+    MatPaginatorModule,
+    AddComponent
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'dob', 'gender', 'edit', 'delete'];
-  dataSource = ELEMENT_DATA;
+export class ListComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['fullName', 'dob', 'gender', 'email', 'phone', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<any>(); 
 
-  constructor(private router: Router, private dialog: MatDialog) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private dialog: MatDialog, private dataService: DataService) {}
 
-  navigateToAddItem(): void {
-    this.router.navigate(['/add-item']);
+  ngOnInit(): void {
+    this.showData();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  showData(): void {
+    this.dataService.getCustomers().subscribe(response => {
+      this.dataSource.data = response; 
+      console.log(response);
+    });
   }
 
   editItem(element: any): void {
     const dialogRef = this.dialog.open(EditComponent, {
       width: '300px',
-      data: { ...element } // Pass the data to the dialog
+      data: { ...element }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Update the data source with the edited values
-        const index = this.dataSource.findIndex(item => item.position === result.position);
+        const index = this.dataSource.data.findIndex(item => item.id === result.id);
         if (index > -1) {
-          this.dataSource[index] = result;
+          this.dataSource.data[index] = result;
+          this.dataSource.data = [...this.dataSource.data]; 
         }
       }
     });
   }
 
   deleteItem(element: any): void {
-    this.dataSource = this.dataSource.filter(item => item.position !== element.position);
+    this.dataService.deleteCustomer(element.id).subscribe({
+      next: response => {
+        console.log('Customer deleted:', response);
+        this.showData(); 
+      },
+      error: error => {
+        console.error('Error deleting customer:', error);
+      }
+    });
   }
-  handleOpenCreateAddItemForm(): void {
-    this.dialog.open(AddComponent); // Use MatDialog to open a dialog
+  
+  navigateToAdd() {
+    this.router.navigate(['/add']);
   }
 }
-
-const ELEMENT_DATA: any[] = [
-  { position: 1, name: 'John Doe', dob: '1990-01-01', gender: 'Male' },
-  { position: 2, name: 'Jane Smith', dob: '1992-05-15', gender: 'Female' }
-];

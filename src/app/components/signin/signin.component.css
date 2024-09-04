@@ -1,0 +1,81 @@
+/* Basic form container styling */
+form {
+    max-width: 360px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form heading styling */
+  h4 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Input fields styling */
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Focus state for input fields */
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Validation message styling */
+  .red-text {
+    color: #d9534f;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  /* Button styling */
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Submit button styling */
+  .btn-green {
+    background-color: #28a745;
+  }
+  
+  .btn-green:hover {
+    background-color: #218838;
+  }
+  
+  /* Reset button styling */
+  .btn-red {
+    background-color: #dc3545;
+  }
+  
+  .btn-red:hover {
+    background-color: #c82333;
+  }
+  
+  /* Button focus state */
+  button:focus {
+    outline: none;
+  }
+  

@@ -1,0 +1,24 @@
+<form [formGroup]="signinForm" (ngSubmit)="signin()">
+    <h4>Please Sign In</h4>
+
+    <input
+        type="email"
+        placeholder="Email here"
+        formControlName="email"
+    />
+    <h5 class="red-text" *ngIf="signinForm.controls['email'].invalid && signinForm.controls['email'].touched">
+        Enter a correct email
+    </h5>
+
+    <input
+        type="password"
+        placeholder="Password here"
+        formControlName="password"
+    />
+    <h5 class="red-text" *ngIf="signinForm.controls['password'].invalid && signinForm.controls['password'].touched">
+        Password is required
+    </h5>
+
+    <button class="btn-green" type="submit">Sign In</button>
+    <button class="btn-red" type="button" (click)="reset()">Reset</button>
+</form>

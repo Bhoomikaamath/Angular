@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +17,7 @@ import { DataService, Item } from '../../services/data.service';
   imports: [MatTableModule,
     MatButtonModule,
     ReactiveFormsModule,  // Import ReactiveFormsModule for reactive forms
-
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
@@ -38,21 +39,21 @@ export class EditComponent {
   ) {
     this.form = this.fb.group({
       id: [data ? data.id : null],
-      name: [data ? data.name : ''],
+      name: [data ? data.fullName : ''],
       dob: [data ? data.dob : ''],
-      gender: [data ? data.gender : '']
+      gender: [data ? data.gender : ''],
+      phone:[data ? data.phone:'']
     });
   }
 
   onSave(): void {
     const item: Item = this.form.value;
-    if (item.id) {
-      this.dataService.updateItem(item);
-    } else {
-      // Assign a new ID (use a more robust method in a real app)
-      item.id = new Date().getTime();
-      this.dataService.addItem(item);
-    }
+   
+      this.dataService.updateItem(item).subscribe(response=>{
+        console.log(response)
+      });
+      
+    
     this.dialogRef.close();
   }
 

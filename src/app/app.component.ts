@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from './components/footer/footer.component';
-import { ListComponent } from './components/list/list.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
@@ -9,8 +7,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   standalone: true,
   imports: [RouterOutlet,
     NavbarComponent,
-    ListComponent,
-    FooterComponent
+    // ListComponent,
+    // FooterComponent,
+    RouterLink,
+   // SignupComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
