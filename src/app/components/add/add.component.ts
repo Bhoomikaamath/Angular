@@ -4,9 +4,10 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { Router, RouterLink } from '@angular/router';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../services/data/data.service';
 
 @Component({
   selector: 'app-add',
@@ -18,60 +19,112 @@ import { DataService } from '../../services/data.service';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    RouterLink
+    RouterLink,
+    MatProgressSpinnerModule
   ],
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
   errorMessage: string = '';
-  model: { fullName: string; dob: string; gender: string; phone: string; email: string } = {
+  successMessage: string = '';
+  model: { fullName: string; dob: string; gender: string; phoneNo: string; email: string;
+  } = {
     fullName: '',
     dob: '',
     gender: '',
-    phone: '',
+    phoneNo: '',
     email: ''
   };
 
   constructor(
     private dataService: DataService,
-    private router:Router
+    private router:Router,
   ) {}
 
-  onSubmit(): void {
-   
-    if (this.model.fullName && this.model.dob && this.model.gender && this.model.phone && this.isEmailValid()) {
+  isLoading = false;
+
+
+//   onSubmit(form: NgForm): void {
+//     this.errorMessage = ''; 
+//     if (form.valid && this.isFormValid()) {
+//       this.isLoading = true;
+//         this.dataService.createCustomer(this.model).subscribe({
+//             next: response => {
+//                 console.log('Customer created:', response);
+//                 this.isLoading = false;
+//                 this.successMessage = 'Item added successfully!';
+              
+//                 setTimeout(() => {
+//                   this.router.navigate(['/list']);
+//                 }, 500);
+//             },
+         
+//             error: error => {
+//                 if (error.status === 409) { 
+//                   this.isLoading = false;
+//                     this.errorMessage = 'Email is already in use.';
+//                 } else if (error.status === 500) { 
+//                     this.errorMessage = 'An error occurred while processing your request. Please try again later.';
+//                 } else {
+//                     this.errorMessage = error.error?.message || 'An unexpected error occurred. Please try again.';
+//                 }
+//                 console.error('Error creating customer:', error);
+//             }
+//         });
+//     } else {
+//         this.errorMessage = 'Form is invalid. Please check your inputs.';
+//         console.log('Form is invalid');
+//     }
+// }
+onSubmit(form: NgForm) {
+  if (form.valid) {
+      this.isLoading = true;
       this.dataService.createCustomer(this.model).subscribe({
-        next: response => {
-          console.log('Customer created:', response);
-          this.router.navigate(['/list']);
-        },
-        error: error => {
-          if (error.status === 409) { 
-            this.errorMessage = 'An unexpected error occurred. Please try again.';
-
-          }else {
-            this.errorMessage = 'Email is already registered.';
-
+          next: (response) => {
+              this.successMessage = 'Item added successfully!';
+              this.isLoading = false; 
+              this.router.navigate(['/list']);
+          },
+          error: (error) => {
+              this.isLoading = false; 
+              if (error.status === 409) {
+                  this.errorMessage = 'Email is already in use.';
+              } else if (error.status === 500) {
+                  this.errorMessage = 'An error occurred while processing your request. Please try again later.';
+              } else {
+                  this.errorMessage = error.error.message || 'Unexpected error';
+              }
           }
-          console.error('Error creating customer:', error);
-        }
       });
-    } else {
-      console.log('Form is invalid');
-    }
+  } else {
+      this.errorMessage = 'Form is invalid. Please check your inputs.';
+      this.isLoading = false;
   }
+}
+
+
+
+  goBack() {
+
+    this.router.navigate(['/list']);
+  }
+
+
+  
   
   reset(form: NgForm): void {
     form.resetForm();
     this.errorMessage = '';
+    this.successMessage = '';
+    this.isLoading = false;
   }
 
   isFormValid(): boolean {
     return !!this.model.fullName &&
            !!this.model.dob &&
            !!this.model.gender &&
-           !!this.model.phone &&
+           !!this.model.phoneNo &&
            this.isPhoneNumberValid() &&
            this.isDobValid() &&
            this.isEmailValid();
@@ -84,11 +137,13 @@ export class AddComponent {
 
   isPhoneNumberValid(): boolean {
     const phonePattern = /^[0-9]{10}$/;
-    return phonePattern.test(this.model.phone);
+    return phonePattern.test(this.model.phoneNo);
   }
 
   isDobValid(): boolean {
     const dob = new Date(this.model.dob);
     return dob < new Date();
   }
+
+  
 }

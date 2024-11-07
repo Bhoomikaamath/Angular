@@ -1,0 +1,66 @@
+<div class="edit">
+
+    <div class="loader-container" *ngIf="isLoading">
+        <mat-progress-spinner
+          mode="indeterminate"
+          color="primary"
+          diameter="50">
+        </mat-progress-spinner>
+      </div>
+    
+    <form [formGroup]="form" (ngSubmit)="onSave()" class="edit-form">
+        <h2 class="form-title">Edit User</h2>
+
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" formControlName="fullName" type="text" class="form-control" />
+            <div *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched" class="error-message">
+                Full Name is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" formControlName="username" type="text" class="form-control" />
+            <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error-message">
+                Username is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" class="form-control" placeholder="Email" />
+            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message">
+                Please enter a valid email address.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" formControlName="role" class="form-control">
+                <option [value]="'Admin'">Admin</option>
+                <option [value]="'User'">User</option>
+            </select>
+            <div *ngIf="form.get('role')?.invalid && form.get('role')?.touched" class="error-message">
+                Role is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Active">Active</label>
+            <select id="Active" formControlName="Active" class="form-control">
+                <option [value]="true">Active</option>
+                <option [value]="false">Deactive</option>
+            </select>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>

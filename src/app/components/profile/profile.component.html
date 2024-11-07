@@ -1,0 +1,45 @@
+
+
+<div class="profile-container" *ngIf="userProfile">
+  <div class="profile-card">
+    <div class="upper-container">
+      <div class="image-container">
+        <img src="favicon.ico" alt="Profile Image" class="profile-img" />
+      </div>
+    </div>
+    <div class="lower-container">
+      <h3 *ngIf="!isEditing">{{ userProfile.data.fullName || 'No Name' }}</h3>
+      <h5 *ngIf="!isEditing"><strong>Email:</strong> {{ userProfile.data.email || 'No Email' }}</h5>
+      <h5 *ngIf="!isEditing"><strong>Username:</strong> {{ userProfile.data.username || 'No Username' }}</h5>
+
+      <div *ngIf="!isEditing; else editTemplate">
+        <!-- <button (click)="checkIsAdmin() && toggleEdit()" class="btn btn-primary">Edit Profile</button> -->
+        <button (click)="goBack()" class="btn btn-secondary">Back</button>
+      </div>
+
+      <ng-template #editTemplate>
+        <div class="edit-container">
+          <label>Full Name</label>
+          <input [(ngModel)]="userProfile.data.fullName" class="edit-input" />
+          
+          <label>Email</label>
+          <input [(ngModel)]="userProfile.data.email" class="edit-input" disabled />
+          
+          <label>Username</label>
+          <input [(ngModel)]="userProfile.data.username" class="edit-input" />
+          
+          <div class="button-group">
+            <button type="button" (click)="updateProfile()" class="btn btn-primary">Save</button>
+            <button type="button" (click)="toggleEdit()" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div>
+
+

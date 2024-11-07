@@ -1,36 +1,70 @@
-<h2>Edit Item</h2>
-<form [formGroup]="form" (ngSubmit)="onSave()">
+<div class="edit">
+<form [formGroup]="form" (ngSubmit)="onSave()" class="edit-form">
+  <h2 class="form-title">Edit Item</h2>
+
   <div class="form-group">
-    <label for="name">Name</label>
-    <input id="name" formControlName="name" type="text">
+    <label for="fullName">Full Name</label>
+    <input id="fullName" formControlName="fullName" type="text" class="form-control" />
+    <div *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched" class="error-message">
+      Full Name is required.
+    </div>
   </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" type="email" class="form-control" placeholder="Email" />
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message">
+      Please enter a valid email address.
+    </div>
+    <div *ngIf="!isEmailValid()" class="error-message">
+      Email is Invalid!! please enter correct emailId...
+    </div>
+    </div>
 
   <div class="form-group">
     <label for="dob">Date of Birth</label>
-    <input id="dob" formControlName="dob" type="date">
-  </div>
-
-  <div class="form-group">
-    <label>Gender</label>
-    <div>
-      <label>
-        <input type="radio" formControlName="gender" value="Male">
-        Male
-      </label>
-      <label>
-        <input type="radio" formControlName="gender" value="Female">
-        Female
-      </label>
+    <input id="dob" formControlName="dob" type="date" class="form-control" />
+    <div *ngIf="form.get('dob')?.invalid && form.get('dob')?.touched" class="error-message">
+      Date of Birth is required.
+    </div>
+    <div *ngIf="!isDobValid() && form.get('dob')?.touched" class="error-message">
+      Date of Birth must be a past date.
     </div>
   </div>
 
   <div class="form-group">
-    <label for="phone">Phone Number</label>
-    <input id="phone" formControlName="phone" type="tel" placeholder="Phone Number">
+    <label>Gender</label>
+    <div class="radio-group">
+      <label class="radio-label">
+        <input type="radio" formControlName="gender" value="Male" class="radio-input" />
+        Male
+      </label>
+      <label class="radio-label">
+        <input type="radio" formControlName="gender" value="Female" class="radio-input" />
+        Female
+      </label>
+      <div *ngIf="form.get('gender')?.invalid && form.get('gender')?.touched" class="error-message">
+        Gender is required.
+      </div>
+    </div>
   </div>
 
-  <div>
-    <button type="submit">Save</button>
-    <button type="button" (click)="onCancel()">Cancel</button>
+  <div class="form-group">
+    <label for="phoneNo">Phone Number</label>
+    <input id="phoneNo" formControlName="phoneNo" type="tel" placeholder="Phone Number" class="form-control" />
+    <div *ngIf="form.get('phoneNo')?.invalid && form.get('phoneNo')?.touched" class="error-message">
+      Phone number must be 10 digits.
+    </div>
+  </div>
+
+
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div class="button-group">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
   </div>
 </form>
+</div>

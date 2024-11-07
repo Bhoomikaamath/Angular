@@ -1,0 +1,155 @@
+.profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+
+.profile-card {
+  width: 90%; 
+  height: auto; 
+  background: rgba(227, 213, 245, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.upper-container {
+  height: 100px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: linear-gradient(to left, hsl(276, 55%, 57%), #d1a2c5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 1px;
+}
+
+.lower-container {
+  margin-top: 20px;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.lower-container h3,
+.lower-container h5 {
+  margin: 10px 0;
+  color: black;
+}
+
+.lower-container h5 {
+  font-size: 1.1rem; 
+  font-weight: 200;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .profile-card {
+    width: 90%;
+  }
+
+  .lower-container h3 {
+    font-size: 1.5rem; 
+  }
+
+  .lower-container h5 {
+    font-size: 1rem;
+  }
+
+  button {
+    width: 100%; 
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 10px;
+  }
+
+  .image-container img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.edit-container {
+  margin-top: 20px;
+  padding: 20px; 
+  background: rgba(227, 213, 245, 0.8); 
+  border-radius: 10px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.edit-button {
+  background-color: rgba(227, 213, 245, 0.8);
+  color: #333; 
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: rgba(210, 162, 197, 0.8);
+}

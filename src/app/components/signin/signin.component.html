@@ -1,24 +1,54 @@
-<form [formGroup]="signinForm" (ngSubmit)="signin()">
-    <h4>Please Sign In</h4>
-
-    <input
-        type="email"
-        placeholder="Email here"
-        formControlName="email"
-    />
-    <h5 class="red-text" *ngIf="signinForm.controls['email'].invalid && signinForm.controls['email'].touched">
-        Enter a correct email
-    </h5>
-
-    <input
-        type="password"
-        placeholder="Password here"
-        formControlName="password"
-    />
-    <h5 class="red-text" *ngIf="signinForm.controls['password'].invalid && signinForm.controls['password'].touched">
-        Password is required
-    </h5>
-
-    <button class="btn-green" type="submit">Sign In</button>
-    <button class="btn-red" type="button" (click)="reset()">Reset</button>
-</form>
+<div class="background-image">
+    <div class="loader-container" *ngIf="isLoading">
+      <mat-progress-spinner
+        mode="indeterminate"
+        color="primary"
+        diameter="50">
+      </mat-progress-spinner>
+    </div>
+  
+    <div class="card">
+      <form [formGroup]="signinForm" (ngSubmit)="signin()">
+        <h4>Sign In</h4>
+  
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="username"
+            id="userName"
+            placeholder="Enter your username"
+            class="form-control"
+          />
+          <div *ngIf="signinForm.get('username')?.invalid && signinForm.get('username')?.touched" class="text-danger">
+            Username is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <input 
+            type="password"
+            formControlName="password"
+            id="userPassword"
+            placeholder="Enter your password"
+            class="form-control"
+          />
+          <div *ngIf="signinForm.get('password')?.invalid && signinForm.get('password')?.touched" class="text-danger">
+            Password is required (min 6 characters)
+          </div>
+        </div>
+  
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+  
+        <button type="submit" class="btn btn-outline-primary button-gap">
+          Login
+        </button>
+        
+        <button type="button" (click)="reset()" class="btn btn-outline-secondary mt-2">
+          Reset
+        </button>
+      </form>
+    </div>
+  </div>
+  

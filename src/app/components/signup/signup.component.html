@@ -1,34 +1,48 @@
-<form [formGroup]="signupForm" (ngSubmit)="register()">
-    <h4>Please Signup</h4>
+<div class="background-image">
+    <form [formGroup]="signupForm" (ngSubmit)="register()">
+        <h4>Signup</h4>
 
-    <input
-        type="text"
-        placeholder="Full Name"
-        formControlName="fullName"
-    />
-    <h5 class="red-text" *ngIf="signupForm.controls['fullName'].invalid && signupForm.controls['fullName'].touched">
-        Full Name is required
-    </h5>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
 
-    <input
-        type="email"
-        placeholder="Email here"
-        formControlName="email"
-    />
-    <h5 class="red-text" *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched">
-        Enter a correct email
-    </h5>
+        <input
+            type="text"
+            placeholder="Full Name"
+            formControlName="fullName"
+        />
+        <h5 class="red-text" *ngIf="signupForm.controls['fullName'].invalid && signupForm.controls['fullName'].touched">
+            Full Name is required
+        </h5>
 
-    <input
-        type="password"
-        placeholder="Password here"
-        formControlName="password"
-    />
-    <h5 class="red-text" *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched">
-        Password is required and must be at least 6 characters
-    </h5>
+        <input
+            type="text"
+            placeholder="Username"
+            formControlName="username"
+        />
+        <h5 class="red-text" *ngIf="signupForm.controls['username'].invalid && signupForm.controls['username'].touched">
+            Enter a correct username
+        </h5>
 
-    <button class="btn-green"  type="submit">Signup</button>
-    <button class="btn-red" type="button" (click)="reset()">Reset</button>
+        <input
+            type="email"
+            placeholder="Email here"
+            formControlName="email"
+        />
+        <h5 class="red-text" *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched">
+            Enter a correct email
+        </h5>
 
-</form>
+        <input
+            type="password"
+            placeholder="Password here"
+            formControlName="password"
+        />
+        <h5 class="red-text" *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched">
+            Password is required and must be at least 6 characters
+        </h5>
+
+        <button class="btn-green" type="submit">Signup</button>
+        <button class="btn-red" type="button" (click)="reset()">Reset</button>
+    </form>
+</div>

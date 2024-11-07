@@ -1,0 +1,50 @@
+.table-container {
+    padding: 16px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.mat-header-cell {
+    background-color: #3f51b5;
+    color: white;
+    font-weight: bold;
+}
+
+.mat-cell {
+    font-size: 14px;
+    padding: 8px;
+}
+
+.mat-checkbox {
+    margin: 0;
+}
+
+button.mat-button {
+    display: flex;
+    align-items: center;
+    margin: 0 4px;
+    color: #3f51b5;
+}
+
+button.mat-button:hover {
+    background-color: rgba(63, 81, 181, 0.1);
+}
+
+mat-icon {
+    margin-right: 4px;
+}
+
+.actions-column {
+    display: flex;
+    justify-content: flex-start;
+}
+
+@media (max-width: 600px) {
+    .mat-header-cell, .mat-cell {
+        font-size: 12px;
+    }
+
+    button.mat-button {
+        font-size: 12px;
+    }
+}

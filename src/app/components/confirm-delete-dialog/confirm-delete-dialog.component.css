@@ -1,0 +1,40 @@
+/* Basic styles for the dialog */
+h2 {
+    margin: 0;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  mat-dialog-content {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+  
+  button {
+    min-width: 80px;
+  }
+  
+  button.mat-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  button.mat-button:hover {
+    background-color: #d32f2f; 
+  }
+  
+  button.mat-button:not(:last-child) {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  button.mat-button:not(:last-child):hover {
+    background-color: #303f9f; 
+  }
+  

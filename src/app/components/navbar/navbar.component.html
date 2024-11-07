@@ -1,13 +1,38 @@
 <mat-toolbar>
- 
-  
-  <!-- Title -->
-  <span>ToDo Application</span>
-  
-  <!-- Spacer to push buttons to the right -->
+  <button *ngIf="isLoggedIn && checkIsAdmin()" mat-icon-button class="home-button" (click)="goHome()">
+    <mat-icon>home</mat-icon>
+  </button>
+
+  <!-- <lib-bhoomika-mylib></lib-bhoomika-mylib> -->
+
+  <span>User Management</span>
   <span class="mat-toolbar-spacer"></span>
-  
-  <!-- Navigation Buttons -->
-  <button mat-button routerLink="/signin" routerLinkActive="active">SignIn</button>
-  <button mat-button routerLink="/signup" routerLinkActive="active">Signup</button>
+
+  <button *ngIf="isLoggedIn && checkIsAdmin()" mat-button (click)="navigateToAdd()">
+    <mat-icon>add</mat-icon>
+    Add New Item
+  </button>
+
+  <button *ngIf="isLoggedIn && checkIsAdmin()" mat-button (click)="allUsershow()">
+    <mat-icon>group</mat-icon>
+    AllUser
+  </button>
+ 
+  <button *ngIf="!isLoggedIn" mat-button routerLink="/signin" routerLinkActive="active">SignIn</button>
+  <button *ngIf="!isLoggedIn" mat-button routerLink="/signup" routerLinkActive="active">Signup</button>
+  <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="profileMenu">
+    <mat-icon>person</mat-icon>
+  </button>
+
+   <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item (click)="viewProfile()">
+      <mat-icon>person</mat-icon>
+      View Profile
+    </button>
+    
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+      </mat-menu>
 </mat-toolbar>

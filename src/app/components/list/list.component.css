@@ -1,55 +1,117 @@
-.form-container {
-    width: 27rem;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-    background-color: #333; /* Assuming a dark background */
-    color: #e0e0e0; /* Light text color for contrast */
+/* Container styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-    margin-bottom: 1rem;
+/* Header section styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.form-label {
-    display: block;
-    font-size: 0.875rem;
-    color: #e0e0e0;
-    margin-bottom: 0.5rem;
+.search-bar mat-form-field {
+  width: 250px;
 }
 
-.form-input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #555;
-    border-radius: 0.25rem;
-    background-color: #444;
-    color: #e0e0e0;
+/* Export button styling */
+.export-button {
+  color: white;
+  background-color: #1976d2;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.form-input:focus {
-    outline: none;
-    box-shadow: 0 0 0.25rem rgba(0, 0, 255, 0.3);
+.export-button:hover {
+  background-color: #1565c0;
 }
 
-.radio-group label {
-    display: block;
-    color: #e0e0e0;
+.export-button[disabled] {
+  background-color: #9e9e9e;
 }
 
-.submit-button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.25rem;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
+/* Table container styling */
+.table-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
-.submit-button:hover {
-    background-color: #0056b3;
+/* Center the loading spinner */
+mat-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-header{
-    background: #6c757d;
+
+/* Delete selected button styling */
+.delete-button {
+  color: #d32f2f;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: #ffebee;
+}
+
+/* Specific styling for action buttons */
+button.edit-button {
+  color: #1976d2;
+}
+
+button.edit-button:hover {
+  background-color: #e3f2fd;
+}
+
+button.delete-button {
+  color: #d32f2f;
+}
+
+button.delete-button:hover {
+  background-color: #ffebee;
+}
+
+/* Message styling */
+.success-message, .error-message {
+  margin-top: 10px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.success-message {
+  color: #388e3c;
+  background-color: #e8f5e9;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
+
+  .search-bar {
+    margin-bottom: 15px;
+  }
+
+  .table-container {
+    padding: 15px;
+  }
+}

@@ -1,0 +1,168 @@
+.table-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9; 
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+   
+}
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1000;
+  }
+  
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.header-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+button.mat-raised-button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+button.mat-raised-button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th.mat-header-cell {
+    background-color: #007bff; 
+    color: #ffffff; 
+    font-weight: bold;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+td.mat-cell {
+    background-color: #ffffff; 
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd; 
+}
+
+tr.mat-row:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tr.mat-row:hover {
+    background-color: #f1f1f1;
+}
+
+.mat-paginator {
+    margin: 1rem 0;
+}
+
+/* Form Styles */
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #007bff; 
+    box-shadow: 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.radio-group label {
+    display: block;
+    color: #333;
+}
+
+.submit-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+header {
+    background: #007bff;
+    color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    margin-top: 20px; /* Adjust the space above the button */
+  }
+  
+  .btn {
+    padding: 10px 20px; /* Adjust padding for better button size */
+    font-size: 16px; /* Increase font size for readability */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d; /* Default secondary button color */
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268; /* Darken color on hover */
+  }
+  

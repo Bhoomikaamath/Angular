@@ -1,65 +1,43 @@
-<div class="table-container">
-  <!-- <button mat-raised-button color="primary">Add New Item</button> -->
-  <button mat-raised-button color="primary" (click)="navigateToAdd()">Add New Item</button>
+<div class="container">
+  <div class="header">
+    <div class="search-bar">
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (input)="onSearchChange($event)" placeholder="Search...">
+      </mat-form-field>
+    </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
-    <ng-container matColumnDef="id" className="header">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+    <button mat-button class="export-button" (click)="exportToExcel()" [disabled]="isExporting" *ngIf="checkIsAdmin()">
+      <mat-icon>download</mat-icon> Excel
+    </button>
+  </div>
 
-    <ng-container matColumnDef="phone" className="header">
-      <th mat-header-cell *matHeaderCellDef> PhoneNo </th>
-      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-    </ng-container>
+  <div class="table-container">
+    <lib-table
+    [tableData]="dataSource.data"
+    [dataSource]="dataSource"
+    [displayedColumns]="displayedColumns"
+    [showActionButton]="checkIsAdmin()"
+    (onEdit)="checkIsAdmin() && editItem($event)"
+    (onDelete)="checkIsAdmin() && deleteItem($event)"
+    (onSelect)="checkIsAdmin() && onSelect($event)"
+    (onPageChangeEmitter)="onPageChange($event)"
+    (onSortChange)="onSortChange($event)">
+    </lib-table>
+  
 
-    <ng-container matColumnDef="fullName" className="header">
-      <th mat-header-cell *matHeaderCellDef> FullName </th>
-      <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
-    </ng-container>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
 
-    <ng-container matColumnDef="dob" className="header">
-      <th mat-header-cell *matHeaderCellDef> DOB </th>
-      <td mat-cell *matCellDef="let element"> {{element.dob}} </td>
-    </ng-container>
+    <div *ngIf="selectedIds.length > 0 && checkIsAdmin()">
+      <button mat-button class="delete-button" (click)="deleteSelected()">Delete Selected</button>
+    </div>
 
-    <ng-container matColumnDef="gender" className="header">
-      <th mat-header-cell *matHeaderCellDef> Gender </th>
-      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-    </ng-container>
+    <div class="success-message" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
 
-    <ng-container matColumnDef="email" className="header">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> Edit </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" (click)="editItem(element)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <!-- Delete Column -->
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef> Delete </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn" (click)="deleteItem(element)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    aria-label="Select page">
-  </mat-paginator>
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
 </div>

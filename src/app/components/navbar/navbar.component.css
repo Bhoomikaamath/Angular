@@ -1,11 +1,18 @@
-/* Additional styles for the Angular Material Toolbar */
+.home-button {
+  margin-right: 8px;
+}
+
+.user-management {
+  vertical-align: middle; 
+}
+
 mat-toolbar {
-  background-color: #333; /* Dark background for the toolbar */
-  color: white; /* Text color */
+  background-color:#8e00b9;
+  color: white;
 }
 
 mat-toolbar button {
-  color: white; /* Button text color */
+  color: white; 
 }
 
 mat-toolbar button.mat-button {
